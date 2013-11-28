@@ -1,0 +1,36 @@
+﻿<Application 
+    x:Class="googlemaps.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"       
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:Microsoft_Phone_Controls_Maps="clr-namespace:Microsoft.Phone.Controls.Maps;assembly=Microsoft.Phone.Controls.Maps" >
+
+    <!--Application Resources-->
+    <Application.Resources>
+        <Style x:Key="PushpinStyle" TargetType="Microsoft_Phone_Controls_Maps:Pushpin" >
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Grid>
+                            <Image Source="/Assets/BgPin.png" Width="80" Height="80" Margin="-40,-40,0,0" VerticalAlignment="Top"/>
+                            <Image Source="{Binding Content}" Width="60" Height="60" Margin="-50,-35,0,0" VerticalAlignment="Top">
+                                <Image.OpacityMask>
+                                    <ImageBrush Stretch="Uniform" ImageSource="/Assets/MaskPin.png"/>
+                                </Image.OpacityMask>
+                            </Image>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Application.Resources>
+
+    <Application.ApplicationLifetimeObjects>
+        <!--Required object that handles lifetime events for the application-->
+        <shell:PhoneApplicationService 
+            Launching="Application_Launching" Closing="Application_Closing" 
+            Activated="Application_Activated" Deactivated="Application_Deactivated"/>
+    </Application.ApplicationLifetimeObjects>
+
+</Application>
