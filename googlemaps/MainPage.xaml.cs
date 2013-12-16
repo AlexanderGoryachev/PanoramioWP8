@@ -31,6 +31,8 @@ namespace googlemaps
     public partial class MainPage : PhoneApplicationPage
     {
         bool isTappedPushpin = false;
+        string PhotoOnPanoramioUrl = string.Empty;
+
         // Constructor
         public MainPage()
         {
@@ -252,6 +254,8 @@ namespace googlemaps
             {
                 LoadingBar.IsIndeterminate = true;
 
+                PinManager.PinCollection.Clear();
+
                 var centerOfViewport = e.GetPosition(googlemap);
                 var viewportPadding = (googlemap.ViewportSize.Width - 180) / 2;
                 GeoCoordinate coordinates = googlemap.ViewportPointToLocation(centerOfViewport);
@@ -278,7 +282,6 @@ namespace googlemaps
 
                 await PinManager.GetPhotosAround(photosUrl);
 
-                PinManager.PinCollection.Clear();
                 for (int i = 0; i < PinManager.ListOfPhotosAround.photos.Count; i++)
                 {
                     PinManager.PinCollection.Add(
@@ -315,6 +318,8 @@ namespace googlemaps
 
             AuthorOfImage.Content = PinManager.ListOfPhotosAround.photos[id].owner_name;
             AuthorOfImage.NavigateUri = new Uri(PinManager.ListOfPhotosAround.photos[id].owner_url, UriKind.Absolute);
+            PhotoOnPanoramioUrl = PinManager.ListOfPhotosAround.photos[id].photo_url;
+            //GoToPanoramio.NavigateUri = new Uri(PinManager.ListOfPhotosAround.photos[id].photo_url, UriKind.Absolute);
         }
 
         protected override void OnBackKeyPress(System.ComponentModel.CancelEventArgs e)
@@ -389,6 +394,13 @@ namespace googlemaps
         private void SearchAppBar_Click(object sender, EventArgs e)
         {
             NavigationService.Navigate(new Uri(@"/SearchPage.xaml", UriKind.RelativeOrAbsolute));
+        }
+
+        private void GoToPanoramio(object sender, EventArgs e)
+        {
+            WebBrowserTask webBrowserTask = new WebBrowserTask();
+            webBrowserTask.Uri = new Uri(PhotoOnPanoramioUrl, UriKind.Absolute);
+            webBrowserTask.Show();
         }
     }
 

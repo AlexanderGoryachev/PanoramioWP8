@@ -158,7 +158,9 @@
     <Content Include="Assets\AppBar\questionmark.png" />
     <Content Include="Assets\AppBar\save.png" />
     <Content Include="Assets\AppBar\share.png" />
+    <Content Include="Assets\AppBar\transport.pause.png" />
     <Content Include="Assets\background.png" />
+    <Content Include="Assets\background_white.png" />
     <Content Include="Assets\BgPin.png" />
     <Content Include="Assets\logo.png" />
     <Content Include="Assets\MaskPin.png" />

@@ -20,6 +20,8 @@
             <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/map.centerme.png" Text="где я?" Click="MyLocationAppBar_Click"/>
             <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/feature.search.png" Text="поиск" Click="SearchAppBar_Click"/>
             <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/feature.settings.png" Text="настройки" Click="SettingsAppBar_Click"/>
+            <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/transport.pause.png" Text="настройки" Click="SettingsAppBar_Click"/>
+
             <!--<shell:ApplicationBar.MenuItems>
                 <shell:ApplicationBarMenuItem Text="MenuItem 1"/>
                 <shell:ApplicationBarMenuItem Text="MenuItem 2"/>
@@ -314,11 +316,11 @@
 
             </Grid>
 
-            <Grid x:Name="ImageGrid" Background="Black" Visibility="Collapsed">
+            <Grid x:Name="ImageGrid" Background="Black" Visibility="Visible">
 
                 <Image x:Name="FullImage" Stretch="Uniform" />
 
-                <Grid x:Name="ImageInfoGrid" Visibility="Collapsed">
+                <Grid x:Name="ImageInfoGrid" Visibility="Visible">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
@@ -327,9 +329,10 @@
 
                     <Grid Grid.Row="0" VerticalAlignment="Top" Background="#ff0e8fb9" MinHeight="80">
                         <StackPanel Background="#ff151515" Margin="0,0,0,7" MinHeight="73" Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Top" >
-                            <TextBlock x:Name="TitleImage" Text="Название" TextWrapping="Wrap" Style="{StaticResource PhoneTextTitle2Style}"/>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="автор:" Style="{StaticResource PhoneTextSubtleStyle}" />
+                            <TextBlock x:Name="TitleImage" Text="Название" Margin="8,12,8,8" Foreground="White" TextWrapping="Wrap" Style="{StaticResource PhoneTextTitle2Style}"/>
+                            
+                            <StackPanel Margin="12,0,0,0" Orientation="Horizontal">                                
+                                <TextBlock Text="&#x1f466;" FontSize="26" Margin="-6,0,5,0"/>
                                 <HyperlinkButton x:Name="AuthorOfImage" TargetName="_blank" Content="Имя автора">
                                     <HyperlinkButton.Template>
                                         <ControlTemplate TargetType="HyperlinkButton">
@@ -337,21 +340,26 @@
                                         </ControlTemplate>
                                     </HyperlinkButton.Template>
                                 </HyperlinkButton>
-                            </StackPanel>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="дата:" Style="{StaticResource PhoneTextSubtleStyle}" Margin="12,0,0,12"/>
+
+                                <TextBlock Text="&#x1f4c5;"  Margin="12,0,0,12" FontSize="26" />
                                 <TextBlock Text="24.05.13" Style="{StaticResource PhoneTextSubtleStyle}" Margin="12,0,0,12"/>
                             </StackPanel>
 
                         </StackPanel>
                     </Grid>
 
-                    <Grid Grid.Row="2" Margin="0,0,0,0" VerticalAlignment="Bottom" Background="#ff0e8fb9" MinHeight="80">
+                    <!--<Grid Grid.Row="2" Margin="0,0,0,0" VerticalAlignment="Bottom" Background="#ff0e8fb9" MinHeight="80">
                         <StackPanel Margin="0,7,0,0" MinHeight="73" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Stretch" Background="#ff151515">
                             <Image Source="/Assets/AppBar/feature.search.png" Height="32" Width="32" Margin="12"/>
-                            <TextBlock Text="http://kdsjfk43j543kj5b34l3k4n" VerticalAlignment="Center" />
+                            <HyperlinkButton x:Name="GoToPanoramio" TargetName="_blank" VerticalAlignment="Center" Margin="0,0,0,5" Content="Перейти к фото на Panoramio">
+                                <HyperlinkButton.Template>
+                                    <ControlTemplate TargetType="HyperlinkButton">
+                                        <TextBlock Text="{TemplateBinding Content}" TextDecorations="Underline" Margin="0" Style="{StaticResource PhoneTextSubtleStyle}" TextWrapping="Wrap" HorizontalAlignment="Left"/>
+                                    </ControlTemplate>
+                                </HyperlinkButton.Template>
+                            </HyperlinkButton>
                         </StackPanel>
-                    </Grid>
+                    </Grid>-->
                 </Grid>
 
             </Grid>
