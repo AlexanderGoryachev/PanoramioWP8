@@ -7,12 +7,24 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 using System.Collections.Generic;
+using System.Device.Location;
 
 namespace googlemaps.Common
 {
     
     class PinManager
     {
+        public static int CurrentId;
+
+        public static ObservableCollection<Pin> PinCollection = new ObservableCollection<Pin>();
+
+        public class Pin
+        {
+            public string id { get; set; }
+            public GeoCoordinate location { get; set; }
+            public Uri iconUri { get; set; }
+        }
+
         public static PhotosAround ListOfPhotosAround = new PhotosAround();
 
         public class PhotosAround
@@ -48,8 +60,9 @@ namespace googlemaps.Common
 
         public static async Task GetPhotosAround(string url)
         {
-            var request = WebRequest.Create(new Uri(url)) as HttpWebRequest;
+            var request = WebRequest.Create(new Uri(url)) as HttpWebRequest; 
             request.Method = "GET";
+            request.UserAgent = "Mozila/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; MyIE2;";
             WebResponse responseObject = await Task<WebResponse>.Factory.FromAsync(request.BeginGetResponse, request.EndGetResponse, request);
             var responseStream = responseObject.GetResponseStream();
             var sr = new StreamReader(responseStream);

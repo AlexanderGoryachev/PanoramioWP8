@@ -8,22 +8,6 @@
 
     <!--Application Resources-->
     <Application.Resources>
-        <Style x:Key="PushpinStyle" TargetType="Microsoft_Phone_Controls_Maps:Pushpin" >
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate>
-                        <Grid>
-                            <Image Source="/Assets/BgPin.png" Width="80" Height="80" Margin="-40,-40,0,0" VerticalAlignment="Top"/>
-                            <Image Source="{Binding Content}" Width="60" Height="60" Margin="-50,-35,0,0" VerticalAlignment="Top">
-                                <Image.OpacityMask>
-                                    <ImageBrush Stretch="Uniform" ImageSource="/Assets/MaskPin.png"/>
-                                </Image.OpacityMask>
-                            </Image>
-                        </Grid>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
     </Application.Resources>
 
     <Application.ApplicationLifetimeObjects>

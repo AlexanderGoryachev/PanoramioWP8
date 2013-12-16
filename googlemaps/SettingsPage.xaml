@@ -1,0 +1,78 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="googlemaps.SettingsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    Toolkit:TiltEffect.IsTiltEnabled="True"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="False">
+
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid x:Name="LayoutRoot">
+        <Grid.Background>
+            <ImageBrush Stretch="Fill" ImageSource="/Assets/background.png"/>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+
+        <!--TitlePanel contains the name of the application and page title-->
+        <StackPanel Grid.Row="0">
+            <StackPanel Margin="0,0,0,0" Orientation="Horizontal" Background="#ff0e8fb9" Height="80">
+                <StackPanel Background="#ff151515" Orientation="Horizontal" Width="480" Height="73" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+                    <Image Source="/Assets/logo.png" Margin="24,0,0,0" Stretch="Uniform" VerticalAlignment="Center" HorizontalAlignment="Left" Width="190" Height="36" />
+                </StackPanel>
+            </StackPanel>
+            <TextBlock Text="настройки" Margin="21,0,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+        </StackPanel>
+
+        <!--ContentPanel - place additional content here-->
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,12,12,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Orientation="Vertical" Grid.Column="0">
+                <TextBlock Margin="12,12,12,24" Text="Кнопки масштаба" Style="{StaticResource PhoneTextSubtleStyle}"/>
+                <StackPanel Orientation="Vertical">
+                    <Toolkit:ToggleSwitch x:Name="ScaleSwitch" 
+                                          Content="" 
+                                          HorizontalAlignment="Left" 
+                                          Click="ScaleSwitch_Click"  />
+                </StackPanel>
+
+                <TextBlock Margin="12,12,12,24" Style="{StaticResource PhoneTextSubtleStyle}">
+                    Определение<LineBreak/>местоположения
+                </TextBlock>
+                <StackPanel Orientation="Vertical">
+                    <Toolkit:ToggleSwitch x:Name="CheckMyLocationSwitch"
+                                          Content="" 
+                                          HorizontalAlignment="Left" 
+                                          Click="CheckMyLocationSwitch_Click" />
+                </StackPanel>
+            </StackPanel>
+
+            <StackPanel Orientation="Vertical" Grid.Column="1">
+                <TextBlock Margin="12" Text="Тип карты" Style="{StaticResource PhoneTextSubtleStyle}"/>
+                <RadioButton x:Name="hybridRadioButton" Content="Гибрид" Checked="hybridRadioButton_Checked" />
+                <RadioButton x:Name="satelliteRadioButton" Content="Спутник" Checked="satelliteRadioButton_Checked" />
+                <RadioButton x:Name="streetRadioButton" Content="Улицы" Checked="streetRadioButton_Checked" />
+                <RadioButton x:Name="physicalRadioButton" Content="Физическая" Checked="physicalRadioButton_Checked" />
+                <RadioButton x:Name="waterRadioButton" Content="Водный слой" Checked="waterRadioButton_Checked" />
+            </StackPanel>
+        </Grid>
+
+    </Grid>
+
+</phone:PhoneApplicationPage>

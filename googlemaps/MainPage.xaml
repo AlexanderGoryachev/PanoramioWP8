@@ -16,6 +16,43 @@
     shell:SystemTray.IsVisible="False">
     <phone:PhoneApplicationPage.Resources>
 
+        <shell:ApplicationBar x:Key="MainAppBar" IsVisible="True" IsMenuEnabled="True" Mode="Minimized">
+            <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/map.centerme.png" Text="где я?" Click="MyLocationAppBar_Click"/>
+            <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/feature.search.png" Text="поиск" Click="SearchAppBar_Click"/>
+            <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/feature.settings.png" Text="настройки" Click="SettingsAppBar_Click"/>
+            <!--<shell:ApplicationBar.MenuItems>
+                <shell:ApplicationBarMenuItem Text="MenuItem 1"/>
+                <shell:ApplicationBarMenuItem Text="MenuItem 2"/>
+            </shell:ApplicationBar.MenuItems>-->
+        </shell:ApplicationBar>
+
+        <shell:ApplicationBar x:Key="PhotoAppBar" IsVisible="True" IsMenuEnabled="True">
+            <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/save.png" Text="сохранить" Click="DownloadPhoto_Click"/>
+            <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/questionmark.png" Text="инфо" Click="PhotoInfo_Click"/>
+            <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/share.png" Text="поделиться" Click="SharePhoto_Click"/>
+            <!--<shell:ApplicationBar.MenuItems>
+                <shell:ApplicationBarMenuItem Text="MenuItem 1"/>
+                <shell:ApplicationBarMenuItem Text="MenuItem 2"/>
+            </shell:ApplicationBar.MenuItems>-->
+        </shell:ApplicationBar>
+
+        <Style x:Key="PushpinStyle" TargetType="Microsoft_Phone_Controls_Maps:Pushpin" >
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Grid>
+                            <Image Source="/Assets/BgPin.png" Width="80" Height="80" Margin="-40,-40,0,0" VerticalAlignment="Top"/>
+                            <Image Source="{Binding Tag}" Width="60" Height="60" Margin="-50,-35,0,0" VerticalAlignment="Top">
+                                <Image.OpacityMask>
+                                    <ImageBrush Stretch="Uniform" ImageSource="/Assets/MaskPin.png"/>
+                                </Image.OpacityMask>
+                            </Image>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
         <Style x:Key="MyLocationPushpinStyle" TargetType="Microsoft_Phone_Controls_Maps:Pushpin">
             <Setter Property="Template">
                 <Setter.Value>
@@ -81,8 +118,8 @@
                             <Border x:Name="ButtonBackground">
                                 <ContentControl x:Name="ContentContainer" ContentTemplate="{TemplateBinding ContentTemplate}" Foreground="{TemplateBinding Foreground}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" HorizontalAlignment="Center" VerticalAlignment="Center">
                                     <Grid Height="48" Width="48" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                        <Image x:Name="image" Source="ZoomIn_Black.png" Stretch="Fill" Visibility="Collapsed"/>
-                                        <Image x:Name="image1" Source="ZoomIn_White.png" Stretch="Fill"/>
+                                        <Image x:Name="image" Source="Assets/ZoomIn_Black.png" Stretch="Fill" Visibility="Collapsed"/>
+                                        <Image x:Name="image1" Source="Assets/ZoomIn_White.png" Stretch="Fill"/>
                                     </Grid>
                                 </ContentControl>
                             </Border>
@@ -146,8 +183,8 @@
                             <Border x:Name="ButtonBackground">
                                 <ContentControl x:Name="ContentContainer" ContentTemplate="{TemplateBinding ContentTemplate}" Foreground="{TemplateBinding Foreground}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" HorizontalAlignment="Center" VerticalAlignment="Center">
                                     <Grid Height="48" Width="48" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                        <Image x:Name="image1" Source="ZoomOut_White.png" Stretch="Fill"/>
-                                        <Image x:Name="image" Source="ZoomOut_Black.png" Stretch="Fill" Visibility="Collapsed"/>
+                                        <Image x:Name="image1" Source="Assets/ZoomOut_White.png" Stretch="Fill"/>
+                                        <Image x:Name="image" Source="Assets/ZoomOut_Black.png" Stretch="Fill" Visibility="Collapsed"/>
                                     </Grid>
                                 </ContentControl>
                             </Border>
@@ -156,6 +193,8 @@
                 </Setter.Value>
             </Setter>
         </Style>
+
+
 
     </phone:PhoneApplicationPage.Resources>
 
@@ -168,18 +207,6 @@
     <phone:PhoneApplicationPage.Foreground>
         <StaticResource ResourceKey="PhoneForegroundBrush"/>
     </phone:PhoneApplicationPage.Foreground>
-
-    <!--Sample code showing usage of ApplicationBar-->
-    <phone:PhoneApplicationPage.ApplicationBar>
-        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True" Mode="Minimized">
-            <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/map.centerme.png" Text="где я?" Click="MyLocationAppBar_Click"/>
-            <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/feature.settings.png" Text="настройки" Click="SettingsAppBar_Click"/>
-            <!--<shell:ApplicationBar.MenuItems>
-                <shell:ApplicationBarMenuItem Text="MenuItem 1"/>
-                <shell:ApplicationBarMenuItem Text="MenuItem 2"/>
-            </shell:ApplicationBar.MenuItems>-->
-        </shell:ApplicationBar>
-    </phone:PhoneApplicationPage.ApplicationBar>
 
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
@@ -197,13 +224,17 @@
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1">
             <Grid>
-                <Microsoft_Phone_Controls_Maps:Map x:Name="googlemap" Margin="0,0,0,0" CopyrightVisibility="Collapsed" ScaleVisibility="Visible" CredentialsProvider="ApBXPZf5IR94SLXE8nh5FYsb5WHKrH1XPY7428-EqQudseivcWhCROIJvGmtnkAV" ZoomLevel="2" LogoVisibility="Collapsed" MouseEnter="googlemap_MouseEnter" Tap="googlemap_Tap">
+                <Microsoft_Phone_Controls_Maps:Map x:Name="googlemap" 
+                                                   Margin="0,0,0,0" 
+                                                   CopyrightVisibility="Collapsed" 
+                                                   ScaleVisibility="Visible" 
+                                                   CredentialsProvider="ApBXPZf5IR94SLXE8nh5FYsb5WHKrH1XPY7428-EqQudseivcWhCROIJvGmtnkAV" 
+                                                   ZoomLevel="2" 
+                                                   LogoVisibility="Collapsed" 
+                                                   Tap="googlemap_Tap">
                     <Microsoft_Phone_Controls_Maps:Map.Mode>
                         <MSPCMCore:MercatorMode/>
                     </Microsoft_Phone_Controls_Maps:Map.Mode>
-                    <Microsoft_Phone_Controls_Maps:Map.Center>
-                        <Location:GeoCoordinate Altitude="NaN" Course="NaN" HorizontalAccuracy="NaN" Longitude="0" Latitude="0" Speed="NaN" VerticalAccuracy="NaN"/>
-                    </Microsoft_Phone_Controls_Maps:Map.Center>
                     <Microsoft_Phone_Controls_Maps:MapTileLayer x:Name="street" Margin="0,0,0,0">
                         <Microsoft_Phone_Controls_Maps:MapTileLayer.TileSources>
                             <GoogleTileSource:GoogleTile TileTypes="Street"/>
@@ -230,6 +261,33 @@
                         </Microsoft_Phone_Controls_Maps:MapTileLayer.TileSources>
                     </Microsoft_Phone_Controls_Maps:MapTileLayer>
 
+                    <Microsoft_Phone_Controls_Maps:MapItemsControl ItemsSource="{Binding PinManager.PinCollection}" x:Name="mapItemsControl">
+                        <Microsoft_Phone_Controls_Maps:MapItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Microsoft_Phone_Controls_Maps:Pushpin Tag="{Binding id}" Location="{Binding location}" Tap="pushpin_Tap">
+                                    <Microsoft_Phone_Controls_Maps:Pushpin.Resources>
+                                        <Style TargetType="Microsoft_Phone_Controls_Maps:Pushpin" >
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate>
+                                                        <Grid>
+                                                            <Image Source="/Assets/BgPin.png" Width="80" Height="80" Margin="-40,-40,0,0" VerticalAlignment="Top"/>
+                                                            <Image Source="{Binding iconUri}" Width="60" Height="60" Margin="-50,-35,0,0" VerticalAlignment="Top">
+                                                                <Image.OpacityMask>
+                                                                    <ImageBrush Stretch="Uniform" ImageSource="/Assets/MaskPin.png"/>
+                                                                </Image.OpacityMask>
+                                                            </Image>
+                                                        </Grid>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Style>
+                                    </Microsoft_Phone_Controls_Maps:Pushpin.Resources>
+                                </Microsoft_Phone_Controls_Maps:Pushpin>
+                            </DataTemplate>
+                        </Microsoft_Phone_Controls_Maps:MapItemsControl.ItemTemplate>
+                    </Microsoft_Phone_Controls_Maps:MapItemsControl>
+
                     <Microsoft_Phone_Controls_Maps:MapLayer x:Name="PushpinsLayer">
                     </Microsoft_Phone_Controls_Maps:MapLayer>
 
@@ -254,51 +312,50 @@
 						Click="ButtonZoomOut_Click" Height="82" />
                 </StackPanel>
 
-                <StackPanel x:Name="SettingsPanel" VerticalAlignment="Top" Background="#aa000000" Visibility="Collapsed" LostFocus="SettingsPanel_LostFocus">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="1*"/>
-                            <ColumnDefinition Width="1*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <StackPanel Orientation="Vertical" Grid.Column="0">
-                            <TextBlock Margin="12" Text="Настройки" Style="{StaticResource PhoneTextGroupHeaderStyle}"/>
-                            <StackPanel Orientation="Horizontal" Margin="0,12">
-                                <Toolkit:ToggleSwitch x:Name="ScaleSwitch" Content="" HorizontalAlignment="Left" Click="ScaleSwitch_Click" />
-                                <TextBlock Text="Масштаб" Style="{StaticResource PhoneTextNormalStyle}" Margin="0,10" FontSize="22" />
-                            </StackPanel>
-                        </StackPanel>
-
-                        <StackPanel Orientation="Vertical" Grid.Column="1">
-                            <TextBlock Margin="12" Text="Слои" Style="{StaticResource PhoneTextGroupHeaderStyle}"/>
-                            <RadioButton x:Name="hybridRadioButton" Content="Гибрид" Checked="hybridRadioButton_Checked"/>
-                            <RadioButton x:Name="satelliteRadioButton" Content="Спутник" Checked="satelliteRadioButton_Checked"/>
-                            <RadioButton x:Name="streetRadioButton" Content="Улицы" Checked="streetRadioButton_Checked"/>
-                            <RadioButton x:Name="physicalRadioButton" Content="Физическая" Checked="physicalRadioButton_Checked"/>
-                            <RadioButton x:Name="waterRadioButton" Content="Водный слой" Checked="waterRadioButton_Checked"/>
-                        </StackPanel>
-                    </Grid>
-                </StackPanel>
             </Grid>
 
             <Grid x:Name="ImageGrid" Background="Black" Visibility="Collapsed">
-                <Grid>                    
-                    <Image x:Name="FullImage" Stretch="Uniform" />
 
-                    <StackPanel Orientation="Vertical" VerticalAlignment="Top" Background="#99000000">
-                        <TextBlock x:Name="TitleImage" />
-                        <StackPanel>
-                            <TextBlock Text="by "/>
-                            <HyperlinkButton x:Name="AuthorOfImage" TargetName="_blank" />
+                <Image x:Name="FullImage" Stretch="Uniform" />
+
+                <Grid x:Name="ImageInfoGrid" Visibility="Collapsed">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0" VerticalAlignment="Top" Background="#ff0e8fb9" MinHeight="80">
+                        <StackPanel Background="#ff151515" Margin="0,0,0,7" MinHeight="73" Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Top" >
+                            <TextBlock x:Name="TitleImage" Text="Название" TextWrapping="Wrap" Style="{StaticResource PhoneTextTitle2Style}"/>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="автор:" Style="{StaticResource PhoneTextSubtleStyle}" />
+                                <HyperlinkButton x:Name="AuthorOfImage" TargetName="_blank" Content="Имя автора">
+                                    <HyperlinkButton.Template>
+                                        <ControlTemplate TargetType="HyperlinkButton">
+                                            <TextBlock Text="{TemplateBinding Content}" TextDecorations="Underline" Margin="0" Style="{StaticResource PhoneTextSubtleStyle}" TextWrapping="Wrap" HorizontalAlignment="Left"/>
+                                        </ControlTemplate>
+                                    </HyperlinkButton.Template>
+                                </HyperlinkButton>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="дата:" Style="{StaticResource PhoneTextSubtleStyle}" Margin="12,0,0,12"/>
+                                <TextBlock Text="24.05.13" Style="{StaticResource PhoneTextSubtleStyle}" Margin="12,0,0,12"/>
+                            </StackPanel>
+
                         </StackPanel>
-                        
-                    </StackPanel>
-                    
-                    <StackPanel Orientation="Vertical" VerticalAlignment="Bottom" Background="#99000000">                        
-                        <TextBlock />
-                    </StackPanel>
+                    </Grid>
+
+                    <Grid Grid.Row="2" Margin="0,0,0,0" VerticalAlignment="Bottom" Background="#ff0e8fb9" MinHeight="80">
+                        <StackPanel Margin="0,7,0,0" MinHeight="73" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Stretch" Background="#ff151515">
+                            <Image Source="/Assets/AppBar/feature.search.png" Height="32" Width="32" Margin="12"/>
+                            <TextBlock Text="http://kdsjfk43j543kj5b34l3k4n" VerticalAlignment="Center" />
+                        </StackPanel>
+                    </Grid>
                 </Grid>
+
             </Grid>
+
             <ProgressBar x:Name="LoadingBar" VerticalAlignment="Top" IsIndeterminate="False" Foreground="{StaticResource PhoneAccentBrush}" Background="{x:Null}" />
         </Grid>
     </Grid>
