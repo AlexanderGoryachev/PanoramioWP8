@@ -378,7 +378,7 @@ namespace googlemaps
             isolatedStorageFileStream.Close();
 
             MessageBox.Show("Фото сохранено");
-
+            LoadingBar.IsIndeterminate = false;
         }
 
         private void PhotoInfo_Click(object sender, EventArgs e)

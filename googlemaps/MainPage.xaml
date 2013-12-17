@@ -316,11 +316,11 @@
 
             </Grid>
 
-            <Grid x:Name="ImageGrid" Background="Black" Visibility="Visible">
+            <Grid x:Name="ImageGrid" Background="Black" Visibility="Collapsed">
 
                 <Image x:Name="FullImage" Stretch="Uniform" />
 
-                <Grid x:Name="ImageInfoGrid" Visibility="Visible">
+                <Grid x:Name="ImageInfoGrid" Visibility="Collapsed">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
@@ -336,13 +336,13 @@
                                 <HyperlinkButton x:Name="AuthorOfImage" TargetName="_blank" Content="Имя автора">
                                     <HyperlinkButton.Template>
                                         <ControlTemplate TargetType="HyperlinkButton">
-                                            <TextBlock Text="{TemplateBinding Content}" TextDecorations="Underline" Margin="0" Style="{StaticResource PhoneTextSubtleStyle}" TextWrapping="Wrap" HorizontalAlignment="Left"/>
+                                            <TextBlock Text="{TemplateBinding Content}" TextDecorations="Underline" Foreground="LightGray"  Margin="0" Style="{StaticResource PhoneTextSubtleStyle}" TextWrapping="Wrap" HorizontalAlignment="Left"/>
                                         </ControlTemplate>
                                     </HyperlinkButton.Template>
                                 </HyperlinkButton>
 
                                 <TextBlock Text="&#x1f4c5;"  Margin="12,0,0,12" FontSize="26" />
-                                <TextBlock Text="24.05.13" Style="{StaticResource PhoneTextSubtleStyle}" Margin="12,0,0,12"/>
+                                <TextBlock Text="24.05.13" Style="{StaticResource PhoneTextSubtleStyle}" Foreground="LightGray" Margin="12,0,0,12"/>
                             </StackPanel>
 
                         </StackPanel>

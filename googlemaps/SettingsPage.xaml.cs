@@ -8,6 +8,8 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using System.IO.IsolatedStorage;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace googlemaps
 {
@@ -17,7 +19,11 @@ namespace googlemaps
         public SettingsPage()
         {
             InitializeComponent();
+            InitSettings();
+        }
 
+        private void InitSettings()
+        {
             if (settings.Contains("MapType"))
             {
                 switch (settings["MapType"].ToString())
@@ -61,6 +67,7 @@ namespace googlemaps
             }
 
         }
+
 
         private void hybridRadioButton_Checked(object sender, RoutedEventArgs e)
         {
