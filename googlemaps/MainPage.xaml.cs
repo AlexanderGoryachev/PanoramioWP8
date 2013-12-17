@@ -301,6 +301,8 @@ namespace googlemaps
         {
             isTappedPushpin = true;
 
+            ImageStoryboard.Begin();
+
             var tappedPushpin = sender as Pushpin;
             var id = Int32.Parse(tappedPushpin.Tag.ToString());
             var uriString = PinManager.ListOfPhotosAround.photos[id].photo_file_url.Replace("square", "medium");
@@ -384,6 +386,7 @@ namespace googlemaps
         private void PhotoInfo_Click(object sender, EventArgs e)
         {
             ImageInfoGrid.Visibility = ImageInfoGrid.Visibility == Visibility.Visible ? Visibility.Collapsed : Visibility.Visible;
+            InfoStoryboard.Begin();
         }
 
         private void SharePhoto_Click(object sender, EventArgs e)

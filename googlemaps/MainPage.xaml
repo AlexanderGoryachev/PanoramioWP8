@@ -20,7 +20,6 @@
             <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/map.centerme.png" Text="где я?" Click="MyLocationAppBar_Click"/>
             <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/feature.search.png" Text="поиск" Click="SearchAppBar_Click"/>
             <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/feature.settings.png" Text="настройки" Click="SettingsAppBar_Click"/>
-            <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/transport.pause.png" Text="настройки" Click="SettingsAppBar_Click"/>
 
             <!--<shell:ApplicationBar.MenuItems>
                 <shell:ApplicationBarMenuItem Text="MenuItem 1"/>
@@ -317,7 +316,18 @@
             </Grid>
 
             <Grid x:Name="ImageGrid" Background="Black" Visibility="Collapsed">
-
+                <Grid.Resources>
+                    <Storyboard x:Name="ImageStoryboard">
+                        <DoubleAnimation
+                        Storyboard.TargetName="ImageGridTransform"    
+                        Storyboard.TargetProperty="ScaleY"
+                        From="0.0" To="1.0" Duration="0:0:0.15"
+                        AutoReverse="False"/>
+                    </Storyboard>
+                </Grid.Resources>
+                <Grid.RenderTransform>
+                    <CompositeTransform x:Name="ImageGridTransform" ScaleY="0"/>
+                </Grid.RenderTransform>
                 <Image x:Name="FullImage" Stretch="Uniform" />
 
                 <Grid x:Name="ImageInfoGrid" Visibility="Collapsed">
@@ -327,11 +337,24 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
-                    <Grid Grid.Row="0" VerticalAlignment="Top" Background="#ff0e8fb9" MinHeight="80">
+                    <Grid Name="InfoGrid"  Grid.Row="0" VerticalAlignment="Top" Background="#ff0e8fb9" MinHeight="80" RenderTransformOrigin="0.5,0.5">
+                        <Grid.Resources>
+                            <Storyboard x:Name="InfoStoryboard">
+                                <DoubleAnimation
+                                Storyboard.TargetName="InfoPlateTransform"    
+                                Storyboard.TargetProperty="ScaleY"
+                                From="0.0" To="1.0" Duration="0:0:0.1"
+                                AutoReverse="False"/>
+                            </Storyboard>
+                        </Grid.Resources>
+                        <Grid.RenderTransform>
+                            <CompositeTransform x:Name="InfoPlateTransform" ScaleY="0"/>
+                        </Grid.RenderTransform>
+
                         <StackPanel Background="#ff151515" Margin="0,0,0,7" MinHeight="73" Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Top" >
                             <TextBlock x:Name="TitleImage" Text="Название" Margin="8,12,8,8" Foreground="White" TextWrapping="Wrap" Style="{StaticResource PhoneTextTitle2Style}"/>
-                            
-                            <StackPanel Margin="12,0,0,0" Orientation="Horizontal">                                
+
+                            <StackPanel Margin="12,0,0,0" Orientation="Horizontal">
                                 <TextBlock Text="&#x1f466;" FontSize="26" Margin="-6,0,5,0"/>
                                 <HyperlinkButton x:Name="AuthorOfImage" TargetName="_blank" Content="Имя автора">
                                     <HyperlinkButton.Template>
